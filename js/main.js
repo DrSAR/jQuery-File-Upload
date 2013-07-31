@@ -22,7 +22,13 @@ $(function () {
         url: '/jQuery-File-Upload/server/php/'
     });
 
-    // Enable iframe cross-domain access via redirect option:
+    $('#fileupload').fileupload(
+	    'option',
+	    'formData', 
+	    {subdir: window.location.pathname.slice(37)}
+    );
+
+	    // Enable iframe cross-domain access via redirect option:
     $('#fileupload').fileupload(
         'option',
         'redirect',
