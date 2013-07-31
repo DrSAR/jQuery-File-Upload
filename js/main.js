@@ -25,7 +25,7 @@ $(function () {
     $('#fileupload').fileupload(
 	    'option',
 	    'formData', 
-	    {subdir: window.location.pathname.slice(37)}
+	    {subdir: window.location.pathname}
     );
 
 	    // Enable iframe cross-domain access via redirect option:

@@ -37,8 +37,10 @@ class UploadHandler
     function __construct($options = null, $initialize = true, $error_messages = null) {
         $this->options = array(
             'script_url' => $this->get_full_url().'/',
-            'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/files/',
-            'upload_url' => $this->get_full_url().'/files/',
+            #'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/files/',
+            'upload_dir' => '/srv/warburg/hdata/',
+            #'upload_url' => $this->get_full_url().'/files/',
+            'upload_url' => '',
             'user_dirs' => false,
             'mkdir_mode' => 0755,
             'param_name' => 'files',
@@ -108,7 +110,7 @@ class UploadHandler
                     'jpeg_quality' => 80
                 ),
                 */
-                'thumbnail' => array(
+                /*'thumbnail' => array(
                     // Uncomment the following to use a defined directory for the thumbnails
                     // instead of a subdirectory based on the version identifier.
                     // Make sure that this directory doesn't allow execution of files if you
@@ -121,7 +123,7 @@ class UploadHandler
                     //'crop' => true,
                     'max_width' => 80,
                     'max_height' => 80
-                )
+	    )*/
             )
         );
         if ($options) {
