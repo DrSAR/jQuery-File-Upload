@@ -162,11 +162,6 @@
     </tr>
 {% } %}
 </script>
-<script type="text/javascript">
-$('#fileupload').on('fileuploadstop', function () {
-	    window.location.reload();
-});
-</script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 <script src="/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
@@ -202,3 +197,8 @@ $('#fileupload').on('fileuploadstop', function () {
 <!--[if gte IE 8]>
 <script src="/jQuery-File-Upload/js/cors/jquery.xdr-transport.js"></script>
 <![endif]-->
+<script type="text/javascript">
+$('#fileupload').on('fileuploadstopped', function () {
+		window.location.reload();
+});
+</script>
