@@ -728,7 +728,9 @@ class UploadHandler
                 }
             }
             $this->set_additional_file_properties($file);
-        }
+	}
+	$log = KLogger::instance(dirname(__FILE__).'/logs', KLogger::DEBUG);
+	$log->logInfo('Upload complete');
         return $file;
     }
 
