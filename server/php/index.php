@@ -13,14 +13,14 @@
 error_reporting(E_ALL | E_STRICT);
 require('KLogger.php');
 require('UploadHandler.php');
+
 class CustomUploadHandler extends UploadHandler {
 	protected function initialize() {
-		$log   = KLogger::instance(dirname(__FILE__).'/logs', KLogger::DEBUG);
-		$log->logInfo('REQUEST',$_REQUEST);
-
-		$subdir = empty($_REQUEST['subdir']) ? '' : $this->trim_file_name($_REQUEST['subdir']);
-		$this->options['upload_dir'] .= $subdir.'/';
-		$this->options['upload_url'] .= $subdir.'/';
+		$subdir = array_key_exists('subdir', $_REQUEST) ? trim(basename(stripslashes($_REQUEST['subdir'])), ".\x00..\x20") : '';
+		$subdir = empty($subdir) ? '' : $this->trim_file_name($_REQUEST['subdir']);
+		$customdir = empty($_REQUEST['customdir']) ? '' : $_REQUEST['customdir'].'/';
+		$this->options['upload_dir'] .= $subdir.$customdir;
+		$this->options['upload_url'] .= $subdir.$customdir;
 	        parent::initialize();
 	}
 }

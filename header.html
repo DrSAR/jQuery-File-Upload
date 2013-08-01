@@ -76,7 +76,10 @@
         </div>
 	<div class="text">
 		<label for="customdir">Target folder: </label>
-		<input name="customdir" placeholder="Current Folder ..." type="text" id="customdir" value="">
+		<input name="customdir" placeholder="Current Folder ..." 
+		 type="text" id="customdir" value=""
+		 title="If empty, files will be uploaded into the folder as listed below;
+otherwise, files will go into the named (possibly to be created) Target folder">
 	 </div>
         <!-- The table listing the files available for upload/download -->
         <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
@@ -170,5 +173,13 @@
 <script type="text/javascript">
 $('#fileupload').on('fileuploadstopped', function () {
 		window.location.reload();
-});
+		});
+$('#customdir').on('input', function(){
+    $('#fileupload').fileupload(
+	'option',
+	'formData',
+	{subdir: window.location.pathname,
+	customdir: $('#customdir').val()}
+	);
+})
 </script>
