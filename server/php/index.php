@@ -16,8 +16,9 @@ require('UploadHandler.php');
 
 class CustomUploadHandler extends UploadHandler {
 	protected function initialize() {
-		$subdir = array_key_exists('subdir', $_REQUEST) ? trim(basename(stripslashes($_REQUEST['subdir'])), ".\x00..\x20") : '';
-		$subdir = empty($subdir) ? '' : $this->trim_file_name($_REQUEST['subdir']);
+		# subdir will begin and end in a slash or be fully empty
+		$subdir = array_key_exists('subdir', $_REQUEST) ? trim(stripslashes($_REQUEST['subdir']), ".\x00..\x20") : '';
+
 		$customdir = empty($_REQUEST['customdir']) ? '' : $_REQUEST['customdir'].'/';
 		$this->options['upload_dir'] .= $subdir.$customdir;
 		$this->options['upload_url'] .= $subdir.$customdir;
