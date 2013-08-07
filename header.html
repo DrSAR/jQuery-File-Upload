@@ -61,6 +61,10 @@
                     <i class="icon-ban-circle icon-white"></i>
                     <span>Cancel upload</span>
                 </button>
+                <button type="button" id='zipdownload' class="btn btn-primary">
+                    <i class="icon-upload icon-white"></i>
+                    <span>Zip download</span>
+                </button>
                 <!-- The loading indicator is shown during file processing -->
                 <span class="fileupload-loading"></span>
             </div>
@@ -181,5 +185,30 @@ $('#customdir').on('input', function(){
 	{subdir: window.location.pathname,
 	customdir: $('#customdir').val()}
 	);
-})
+    })
+// Thank you to:
+// http://www.filamentgroup.com/lab/jquery_plugin_for_requesting_ajax_like_file_downloads/
+// Scott
+jQuery.download = function(url, data, method){
+    //url and data options required
+    if( url && data ){ 
+        //data can be string of parameters or array/object
+        data = typeof data == 'string' ? data : jQuery.param(data);
+        //split params into form inputs
+        var inputs = '';
+        jQuery.each(data.split('&'), function(){ 
+            var pair = this.split('=');
+            inputs+='<input type="hidden" name="'+ pair[0] +'" value="'+ pair[1] +'" />'; 
+        });
+        //send request
+        jQuery('<form action="'+ url +'" method="'+ (method||'post') +'">'+inputs+'</form>')
+        .appendTo('body').submit().remove();
+    };
+};
+
+$('#zipdownload').on('click', function(){
+        var pathname=window.location.pathname;
+        $.download('/jQuery-File-Upload/zipdown.php','dir2zip=' + pathname, 'get');
+    });
+
 </script>
